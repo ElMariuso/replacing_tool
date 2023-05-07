@@ -35,6 +35,7 @@ char    *create_content(char    *path, int size)
         i++;
     }
     fclose(f);
+    ret[i] = '\0';
     return (ret);
 }
 
@@ -89,6 +90,7 @@ char    *replacing(char *content, char  *to_replace, char   *new_str)
             i++;
         }
     }
+    new_content[i] = '\0';
     free(content);
     return (new_content);
 }
