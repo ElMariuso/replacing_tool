@@ -34,8 +34,6 @@ char    *create_content(char    *path, int size)
         i++;
     }
     fclose(f);
-    if (rename(path, "old_file.txt"))
-        return (NULL);
     return (ret);
 }
 
