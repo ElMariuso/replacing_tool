@@ -131,7 +131,10 @@ int replaceInFolder(char    *folderPath, char   *to_replace, char   *new_str)
 
     dir = opendir(folderPath);
     if (dir == NULL)
+    {
+        printf("Something wrong happened during opening folder!");
         return (1);
+    }
     while ((ent = readdir(dir)) != NULL)
     {
         if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
