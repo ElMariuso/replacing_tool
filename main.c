@@ -142,6 +142,7 @@ int replaceInFolder(char    *folderPath, char   *to_replace, char   *new_str)
         }
     }
     closedir(dir);
+    printf("Done!");
     return (0);
 }
 
