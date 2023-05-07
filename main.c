@@ -132,12 +132,13 @@ int replaceInFolder(char    *folderPath, char   *to_replace, char   *new_str)
     dir = opendir(folderPath);
     if (dir == NULL)
     {
-        printf("Something wrong happened during opening folder!");
+        printf("Something wrong happened during opening folder!\n");
         return (1);
     }
     while ((ent = readdir(dir)) != NULL)
     {
-        if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
+        if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0)
+        {
             char* filePath = (char*)malloc(sizeof(char) * (strlen(folderPath) + strlen(ent->d_name) + 2));
             sprintf(filePath, "%s/%s", folderPath, ent->d_name);
             prompt(filePath, to_replace, new_str);
@@ -145,15 +146,18 @@ int replaceInFolder(char    *folderPath, char   *to_replace, char   *new_str)
         }
     }
     closedir(dir);
-    printf("Done!");
+    printf("Done!\n");
     return (0);
 }
 
 int main(int argc, char **argv)
 {
     if (argc < 4)
+    {
+        printf("Not enough arguments!\n");
         return (1);
+    }
     else
-        return (prompt(argv[1], argv[2], argv[3]));
+        return (replaceInFolder(argv[1], argv[2], argv[3]));
     return (0);
 }
