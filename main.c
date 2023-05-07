@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
 int flen(char *path)
 {
@@ -120,6 +121,27 @@ int prompt(char *path, char *to_replace, char *new_str)
         return (1);
     }
     free(content);
+    return (0);
+}
+
+int replaceInFolder(char    *folderPath, char   *to_replace, char   *new_str)
+{
+    DIR*            dir;
+    struct dirent*  ent;
+
+    dir = opendir(folderPath);
+    if (dir == NULL)
+        return (1);
+    while ((ent = readdir(dir)) != NULL)
+    {
+        if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
+            char* filePath = (char*)malloc(sizeof(char) * (strlen(folderPath) + strlen(ent->d_name) + 2));
+            sprintf(filePath, "%s/%s", folderPath, ent->d_name);
+            prompt(filePath, to_replace, new_str);
+            free(filePath);
+        }
+    }
+    closedir(dir);
     return (0);
 }
 
